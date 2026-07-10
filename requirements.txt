@@ -1,0 +1,10 @@
+pandas>=1.5,<3.0
+numpy>=1.20
+SQLAlchemy>=1.4,<3.0
+PyMySQL>=1.0
+mysql-connector-python>=8.0
+pyTelegramBotAPI>=4.0
+requests>=2.25
+tqdm>=4.60
+openpyxl>=3.0
+python-dotenv>=1.0
