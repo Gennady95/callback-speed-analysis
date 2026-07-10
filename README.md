@@ -7,9 +7,14 @@
 
 ## Description
 
-This project analyzes how quickly employees respond to customer requests by matching incoming requests with outgoing calls.
+This project analyzes customer callback speed and employee response time using SQL call history data.
 
-The script combines Excel customer data with historical call records from SQL database and evaluates whether callbacks were completed within the required time limit.
+The tool supports two analysis modes:
+
+1. Database analysis mode — analyzes callback performance directly from SQL data.
+2. Excel file mode — validates a custom list of customer requests from Excel files and checks callback results for each record.
+
+The script matches customer requests with incoming and outgoing calls and evaluates whether employees contacted customers within the required SLA time.
 
 ## Business Goal
 
@@ -25,13 +30,15 @@ The analysis helps answer:
 ## Features
 
 - SQL database connection
-- Call history extraction
 - Excel file processing
+- Call history extraction
 - Phone number cleaning and normalization
 - Incoming and outgoing call matching
 - Callback time calculation
-- SLA compliance check
-- Customer response classification
+- SLA compliance analysis
+- Multiple analysis modes:
+  - full database callback analysis
+  - Excel-based customer list validation
 - Automatic Excel report generation
 - Telegram execution notifications
 
@@ -48,47 +55,51 @@ The analysis helps answer:
 
 ## How It Works
 
-1. Loads customer request data from Excel
-2. Extracts incoming and outgoing calls from SQL database
-3. Cleans and standardizes phone numbers
-4. Matches calls by phone number
-5. Finds the first callback after customer request
-6. Calculates response time
-7. Classifies result:
-   - callback completed on time
-   - callback completed late
-   - no callback
-   - customer called back first
-8. Adds analytics sheet to Excel report
-9. Sends Telegram notification after execution
+### Database Mode
 
+1. Loads call history from SQL database
+2. Processes incoming and outgoing calls
+3. Matches customer requests with employee callbacks
+4. Calculates callback response time
+5. Checks SLA compliance
+6. Generates analytics report
+
+### Excel File Mode
+
+1. Loads customer request list from Excel
+2. Extracts relevant calls from SQL database
+3. Filters calls by phone number and request date
+4. Searches for the first outgoing callback
+5. Checks if callback was completed within 15 minutes
+6. Determines customer behavior:
+   - employee called back on time
+   - employee called back late
+   - customer called again before callback
+   - no callback detected
+7. Adds analysis results into the Excel file
 ## Example / Demo
 
 ### Input
 
-Excel file containing:
+Database mode:
 
-- Customer phone numbers
-- Request creation datetime
-
-SQL database containing:
-
+- Call history database
 - Incoming calls
 - Outgoing calls
 - Call timestamps
 
+Excel file mode:
+
+Excel file containing:
+- Customer phone number
+- Request creation datetime
+
 ### Output
 
-Excel report containing:
+Generated report containing:
 
 - First outgoing call time
 - First incoming call time
 - Callback status
 - SLA result
-
-This project can be used for:
-
-- customer service analytics
-- call center performance monitoring
-- SLA control
-- sales team efficiency analysis
+- Response time classification
