@@ -4,11 +4,14 @@ from datetime import datetime
 from mysql.connector import Error
 from sqlalchemy import create_engine
 from tqdm import tqdm
+import os
+from dotenv import load_dotenv
 
 #Паттерны
-engine = create_engine(DB_URL)                                                                                           # Коннектор SQL
-date = datetime.now().strftime('%d.%m %H:%M:%S')                                                                         # Текущая дата
-bot = telebot.TeleBot(CHAT_ID)                                                                                           # Токен telegram бота
+load_dotenv()
+engine = create_engine(os.getenv("DB_URL"))
+bot = telebot.TeleBot(os.getenv("TELEGRAM_TOKEN"))
+chat_id = os.getenv("CHAT_ID")
 re_1 = r'[^0-9,.;/]'                                                                                                     # Регулярное выражение для отсева букв, пробелов
 re_2 = r'[^0-9]'                                                                                                         # Регулярное выражение для отсева знаков
 
